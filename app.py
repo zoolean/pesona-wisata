@@ -31,7 +31,7 @@ def main():
             SECRET_KEY,
             algorithms=['HS256']
         )
-        user_info = db.user.find_one({"email": payload["id"]})
+        user_info = db.users.find_one({"email": payload["id"]})
         is_admin = user_info.get("category") == "admin"
         logged_in = True
         print(user_info)
@@ -40,13 +40,115 @@ def main():
         msg = 'Your token has expired'
     except jwt.exceptions.DecodeError:
         msg = 'There was a problem logging you in'
-    return render_template('index.html', msg=msg)
+    return render_template('homepage.html', msg=msg)
 
+# routing ke halaman login
+@app.route('/signin')
+def signin():
+    return render_template('login.html')
 
+#log in user
+@app.route('/sign_in', methods=['POST'])
+def sign_in():
+    email = request.form["email"]
+    password = request.form["password"]
+    print(email)
+    pw_hash = hashlib.sha256(password.encode("utf-8")).hexdigest()
+    print(pw_hash)
+    result = db.users.find_one(
+        {
+            "email": email,
+            "password": pw_hash,
+        }
+    )
+    if result:
+        payload = {
+            "id": email,
+            "exp": datetime.utcnow() + timedelta(seconds=60 * 60 * 24),
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
+        return jsonify(
+            {
+                "result": "success",
+                "token": token,
+            }
+        )
+    else:
+        return jsonify(
+            {
+                "result": "fail",
+                "msg": "We could not find a user with that id/password combination",
+            }
+        )
 
-# Menampilkan Data Domestic
-@app.route('/domestic')
+# routing ke halaman register
+@app.route('/signup')
+def signup():
+    return render_template('register.html')
+
+# register user
+@app.route('/sign_up/save', methods = ['POST'])
+def sign_up():
+    name = request.form.get('name')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    password_hash = hashlib.sha256(password. encode('utf-8')).hexdigest()
+    doc = {
+        "name" : name,
+        "email" : email,
+        "category" : 'visitor',
+        "password" : password_hash                                          
+    }
+    db.users.insert_one(doc)
+    return jsonify({'result': 'success'})
+
+@app.route('/signin')
+def signin():
+    return render_template('login.html')
+
+# Menamppilkan Data Domestic untuk Admin
+@app.route('/admin_domestic')
+def admin_domestic():
+    token_receive = request.cookies.get(TOKEN_KEY)
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_info = db.user.find_one({"email": payload["id"]})
+    admin_info = user_info.get("category") == "admin"
+    if admin_info:
+        domestic = db.domestic.find()
+        domestic_list = []
+        for attraction in domestic:
+            domestic_list.append({
+                'id': str(attraction['_id']),
+                'name': attraction['name'],
+                'description': attraction['description'],
+                'image_domestic' : attraction['image_domestic'],
+                'total_tickets': attraction['total_tickets']
+            })
+        return jsonify(domestic_list), 200
+    
+# Menamppilkan Data International untuk Admin
+@app.route('/admin_international')
+def admin_international():
+    token_receive = request.cookies.get(TOKEN_KEY)
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_info = db.user.find_one({"email": payload["id"]})
+    admin_info = user_info.get("category") == "admin"
+    if admin_info:
+        international = db.international.find()
+        international_list = []
+        for attraction in international:
+            international_list.append({
+                'id': str(attraction['_id']),
+                'name': attraction['name'],
+                'description': attraction['description'],
+                'image_international' : attraction['image_international'],
+                'total_tickets': attraction['total_tickets']
+            })
+        return render_template("admin-domestic.html", international_list=international_list), 200
+
+# Menampilkan Data Domestic untuk User
+@app.route('/domestic', methods=['GET'])
 def get_domestic():
     domestic = db.domestic.find()
     domestic_list = []
@@ -55,7 +157,7 @@ def get_domestic():
             'id': str(attraction['_id']),
             'name': attraction['name'],
             'description': attraction['description'],
-            'image_wisata' : attraction['image_wisata'],
+            'image_domestic' : attraction['image_domestic'],
             'total_tickets': attraction['total_tickets']
         })
     return jsonify(domestic_list), 200
@@ -69,19 +171,19 @@ def add_domestic():
     total_tickets = int(request.form.get('total_tickets'))
     today = datetime.now()
     mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
-    file = request.files['image_wisata']
+    file = request.files['image_domestic']
     extension = file.filename.split('.')[-1]
     filename = f'static/images/wisata-{name}-{mytime}.{extension}'
     file.save(filename)
     price = float(request.form.get('price'))
     formatted_price = format_currency(price, 'IDR', locale='id_ID')
-    db.wisata.insert_one({
+    db.domestic.insert_one({
         'name' : name,
         'description' : description,
         'location' : location,
         'price' : price,
         'price_rupiah' : formatted_price,
-        'image_wisata' : filename,
+        'image_domestic' : filename,
         'total_tickets' : total_tickets,
         
     })
@@ -143,7 +245,7 @@ def edit_domestic(id):
 # Hapus Domestic
 @app.route('/domestic/<post_id>', methods=['DELETE'])
 def delete_domestic(post_id):
-    existing_domestic = db.domestid.find_one({'_id': ObjectId(post_id)})
+    existing_domestic = db.domestic.find_one({'_id': ObjectId(post_id)})
     existing_file_path = existing_domestic['image_wisata']
     os.remove(existing_file_path)
     result = db.domestic.delete_one({'_id': ObjectId(post_id)})    
@@ -153,7 +255,7 @@ def delete_domestic(post_id):
         return jsonify({'message': 'Post not found'}), 404
 
 @app.route('/international')
-def international():
+def get_international():
     international = db.international.find()
     international_list = []
     for attraction in international:

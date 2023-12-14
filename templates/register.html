@@ -1,86 +1,115 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" />
-    <title>PesonaWisata | Register</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta content="" name="keywords" />
-    <meta content="" name="description" />
 
-    <!-- Favicon -->
-    <link href="./static/img/favicon.ico" rel="icon" />
+<head>
+  <meta charset="utf-8" />
+  <title>PesonaWisata | Register</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="" name="keywords" />
+  <meta content="" name="description" />
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Favicon -->
+  <link href="./static/img/favicon.ico" rel="icon" />
 
-    <!-- Icon Font Stylesheet -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+    rel="stylesheet" />
 
-    <!-- Libraries Stylesheet -->
-    <link href="./static/lib/animate/animate.min.css" rel="stylesheet" />
-    <link href="./static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
-    <link
-      href="./static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
-      rel="stylesheet"
-    />
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="./static/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Libraries Stylesheet -->
+  <link href="./static/lib/animate/animate.min.css" rel="stylesheet" />
+  <link href="./static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+  <link href="./static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
-    <!-- Template Stylesheet -->
-    <link href="./static/css/style.css" rel="stylesheet" />
-  </head>
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="./static/css/bootstrap.min.css" rel="stylesheet" />
 
-  <body>
-    <div class="wrapper wow fadeIn">
-      <div class="title">Register Form</div>
-      <form action="login.html">
-        <div class="field">
-          <input type="text" required />
-          <label>Username</label>
-        </div>
-        <div class="field">
-          <input type="text" required />
-          <label>Email Address</label>
-        </div>
-        <div class="field">
-          <input type="password" required />
-          <label>Password</label>
-        </div>
-        <div class="content"></div>
-        <div class="field">
-          <input type="submit" value="Register" />
-        </div>
-        <div class="signup-link">
-          Already have an account? <a href="/login">Sign in</a>
-        </div>
-      </form>
-    </div>
-  </body>
+  <!-- Template Stylesheet -->
+  <link href="./static/css/style.css" rel="stylesheet" />
+  <script>
 
-  <!-- JavaScript Libraries -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./static/lib/wow/wow.min.js"></script>
-  <script src="./static/lib/easing/easing.min.js"></script>
-  <script src="./static/lib/waypoints/waypoints.min.js"></script>
-  <script src="./static/lib/owlcarousel/owl.carousel.min.js"></script>
-  <script src="./static/lib/tempusdominus/js/moment.min.js"></script>
-  <script src="./static/lib/tempusdominus/js/moment-timezone.min.js"></script>
-  <script src="./static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    function signup() {
+      let name = $("#name").val();
+      let email = $("#email").val();
+      let password = $("#password").val();
 
-  <!-- Template Javascript -->
-  <script src="./static/js/main.js"></script>
+      if (name == '' || email == '' || password == '') {
+        Swal.fire(
+          'Oops',
+          'Data tidak lengkap!',
+          'error'
+        )
+      } else {
+        $.ajax({
+          type: "POST",
+          url: "/sign_up/save",
+          data: {
+            name: name,
+            email: email,
+            password: password
+          },
+          success: function (response) {
+            Swal.fire(
+              'Done',
+              'You are signed up, nice!',
+              'success'
+            )
+            window.location.replace("/signin");
+          },
+        });
+      }
+
+
+    }
+
+  </script>
+</head>
+
+<body>
+  <div class="wrapper wow fadeIn">
+    <div class="title">Register Form</div>
+    <form action="/signin">
+      <div class="field">
+        <input id="name" type="text" required />
+        <label>Username</label>
+      </div>
+      <div class="field">
+        <input id="email" type="text" required />
+        <label>Email Address</label>
+      </div>
+      <div class="field">
+        <input id="password" type="password" required />
+        <label>Password</label>
+      </div>
+      <div class="content"></div>
+      <div class="field">
+        <input onclick="signup()" type="submit" value="Register" />
+      </div>
+      <div class="signup-link">
+        Already have an account? <a href="/signin">Sign in</a>
+      </div>
+    </form>
+  </div>
+</body>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="./static/lib/wow/wow.min.js"></script>
+<script src="./static/lib/easing/easing.min.js"></script>
+<script src="./static/lib/waypoints/waypoints.min.js"></script>
+<script src="./static/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="./static/lib/tempusdominus/js/moment.min.js"></script>
+<script src="./static/lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="./static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="./static/js/main.js"></script>
+
 </html>

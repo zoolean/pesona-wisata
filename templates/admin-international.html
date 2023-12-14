@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>PesonaWisata | Home</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -13,7 +14,9 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -31,294 +34,300 @@
     <link href="./static/css/style.css" rel="stylesheet">
 
     <style>
-      body {
-          margin: 0;
-          padding-bottom: 50px;
-          font-family: 'Bitter', serif;
-          font-family: 'Shantell Sans', cursive;
-          font-family: 'Tilt Neon', cursive;
-      }
+        body {
+            margin: 0;
+            padding-bottom: 50px;
+            font-family: 'Bitter', serif;
+            font-family: 'Shantell Sans', cursive;
+            font-family: 'Tilt Neon', cursive;
+        }
 
-      .sidebar {
-          width: 300px;
-          min-height: 100vh;
-          display: flex;
-          position: fixed;
-          top: 0;
-          left: 0;
-          bottom: 0;
-      }
+        .sidebar {
+            width: 300px;
+            min-height: 100vh;
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+        }
 
-      .main {
-          margin-left: 280px;
-          margin-right: 10px;
-      }
+        .main {
+            margin-left: 280px;
+            margin-right: 10px;
+        }
 
-      .title {
-          font-size: 43px;
-          font-weight: 900;
-          color: #9bb55a;
-          margin-left: 20px;
-          padding-top: 50px;
-      }
+        .title {
+            font-size: 43px;
+            font-weight: 900;
+            color: #9bb55a;
+            margin-left: 20px;
+            padding-top: 50px;
+        }
 
-      .btnadd {
-          display: inline-block;
-          background-color: #9bb55a;
-          color: white;
-          font-size: 16px;
-          font-weight: 700;
-          padding: 9px 33px;
-          margin-top: 40px;
-          margin-bottom: 40px;
-          margin-left: 30px;
-          margin-right: 10px;
-          border-radius: 30px;
-          text-decoration: none;
-          border: 2px solid #9bb55a;
-      }
+        .btnadd {
+            display: inline-block;
+            background-color: #9bb55a;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 9px 33px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            margin-left: 30px;
+            margin-right: 10px;
+            border-radius: 30px;
+            text-decoration: none;
+            border: 2px solid #9bb55a;
+        }
 
-      .btnadd:hover {
-          background-color: #9bb55a;
+        .btnadd:hover {
+            background-color: #9bb55a;
 
-      }
+        }
 
-      .container {
-          width: auto;
-          height: auto;
-          box-shadow: 0px 0px 3px 0px gray;
-          padding: 25px;
-          border-radius: 12px;
-          background-color: white;
-          font-family: 'Bitter', serif;
-          font-family: 'Shantell Sans', cursive;
-          font-family: 'Tilt Neon', cursive;
-      }
+        .container {
+            width: auto;
+            height: auto;
+            box-shadow: 0px 0px 3px 0px gray;
+            padding: 25px;
+            border-radius: 12px;
+            background-color: white;
+            font-family: 'Bitter', serif;
+            font-family: 'Shantell Sans', cursive;
+            font-family: 'Tilt Neon', cursive;
+        }
 
-      .upbtn {
-          background-color: #4870f9;
-          color: white;
-          padding: 4px 8px;
-          border-radius: 7px;
-          width: 40px;
-          justify-content: center;
-          position: relative;
-      }
+        .upbtn {
+            background-color: #4870f9;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 7px;
+            width: 40px;
+            justify-content: center;
+            position: relative;
+        }
 
-      .delbtn {
-          background-color: rgb(215, 11, 11);
-          color: white;
-          padding: 4px 8px;
-          border-radius: 7px;
-          width: 40px;
-          justify-content: center;
-          position: relative;
-      }
-  </style>
+        .delbtn {
+            background-color: rgb(215, 11, 11);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 7px;
+            width: 40px;
+            justify-content: center;
+            position: relative;
+        }
+    </style>
 
-  <script>
+    <script>
 
-      function toggleReadMore(button) {
-          let cardBody = $(button).closest('.card-body');
-          cardBody.toggleClass('read-more');
-          let readMoreButton = $(button);
-          if (cardBody.hasClass('read-more')) {
-              readMoreButton.text('Read Less');
-          } else {
-              readMoreButton.text('Read More');
-          }
-      }
+        function toggleReadMore(button) {
+            let cardBody = $(button).closest('.card-body');
+            cardBody.toggleClass('read-more');
+            let readMoreButton = $(button);
+            if (cardBody.hasClass('read-more')) {
+                readMoreButton.text('Read Less');
+            } else {
+                readMoreButton.text('Read More');
+            }
+        }
 
-      function addnew() {
-          window.location.href = "addcard.html";
-      }
+        function addnew() {
+            window.location.href = "addcard.html";
+        }
 
-      function contoh() {
-          swal({
-              title: "Berhasil!",
-              text: "Pop-up berhasil dihapus",
-              icon: "success",
-              button: true
-          });
-      }
+        function contoh() {
+            swal({
+                title: "Berhasil!",
+                text: "Pop-up berhasil dihapus",
+                icon: "success",
+                button: true
+            });
+        }
 
-      document.getElementById('user-btn').addEventListener('click', function () {
-          // Menghapus kelas 'active' dari semua elemen <li>
-          var listItems = document.querySelectorAll('.nav-item');
-          listItems.forEach(function (item) {
-              item.classList.remove('active');
-          });
+        document.getElementById('user-btn').addEventListener('click', function () {
+            // Menghapus kelas 'active' dari semua elemen <li>
+            var listItems = document.querySelectorAll('.nav-item');
+            listItems.forEach(function (item) {
+                item.classList.remove('active');
+            });
 
-          // Menambahkan kelas 'active' pada tombol User
-          this.classList.add('active');
+            // Menambahkan kelas 'active' pada tombol User
+            this.classList.add('active');
 
-          // Mengarahkan ke halaman daftar_user.html
-          window.location.href = '/daftar_user';
-      });
+            // Mengarahkan ke halaman daftar_user.html
+            window.location.href = '/daftar_user';
+        });
 
-      document.getElementById('review-btn').addEventListener('click', function () {
-          // Menghapus kelas 'active' dari semua elemen <li>
-          var listItems = document.querySelectorAll('.nav-item');
-          listItems.forEach(function (item) {
-              item.classList.remove('active');
-          });
+        document.getElementById('review-btn').addEventListener('click', function () {
+            // Menghapus kelas 'active' dari semua elemen <li>
+            var listItems = document.querySelectorAll('.nav-item');
+            listItems.forEach(function (item) {
+                item.classList.remove('active');
+            });
 
-          // Menambahkan kelas 'active' pada tombol User
-          this.classList.add('active');
+            // Menambahkan kelas 'active' pada tombol User
+            this.classList.add('active');
 
-          // Mengarahkan ke halaman daftar_user.html
-          window.location.href = '/daftar_review';
-      });
+            // Mengarahkan ke halaman daftar_user.html
+            window.location.href = '/daftar_review';
+        });
 
 
 
-  </script>
+    </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </head>
 
 
 <body>
-  <div class=" flex-row px-0">
-      <!-- Sidebar -->
-      <div class="sidebar">
-          <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary"
-              style="font-family: 'Bitter', serif; font-family: 'Shantell Sans', cursive; font-family: 'Tilt Neon', cursive;">
-              <a href="admin-domestic.html" class="d-flex align-items-center mx-5 mb-3 mb-md-0 link-body-emphasis text-decoration-none">
-                  <!-- <span class="fs-4">Sidebar</span> -->
-                  <p style="font-size: 40px; font-weight: 900; color: 4870f9;">Sidebar</p>
-              </a>
-              <br>
-              <ul class="nav nav-pills flex-column mb-auto">
-                  <li class="nav-item">
-                    <a href="admin-domestic.html" class="nav-link link-body-emphasis" style="font-size: 18px;"><i
-                              class="fa fa-home" style="font-size: 28px;"></i>
-                          <svg class="bi pe-none me-2" width="16" height="16">
-                              <use xlink:href="#home"></use>
-                          </svg>
-                          Domestic
-                      </a>
-                  </li>
-                  <li id="user-btn">
+    <div class=" flex-row px-0">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary"
+                style="font-family: 'Bitter', serif; font-family: 'Shantell Sans', cursive; font-family: 'Tilt Neon', cursive;">
+                <a href="admin-domestic.html"
+                    class="d-flex align-items-center mx-5 mb-3 mb-md-0 link-body-emphasis text-decoration-none">
+                    <!-- <span class="fs-4">Sidebar</span> -->
+                    <p style="font-size: 40px; font-weight: 900; color: 4870f9;">Sidebar</p>
+                </a>
+                <br>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li id="user-btn">
+                        <a href="/daftar_user" class="nav-link link-body-emphasis" style="font-size: 18px;">
+                            <i style='font-size:21px' class='fas'>&#xf0c0;</i>
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="#speedometer2"></use>
+                            </svg>
+                            User
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/admin_domestic" class="nav-link link-body-emphasis" style="font-size: 18px;"><i
+                                class="fa fa-home" style="font-size: 28px;"></i>
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="#home"></use>
+                            </svg>
+                            Domestic
+                        </a>
+                    </li>
+                    <li id="user-btn">
 
-                        <a href="admin-international.html" class="nav-link active" aria-current="page" style="font-size: 18px;">
-                        <i style="font-size: 28px;" class="fa fa-home"></i>
-                        <svg class="bi pe-none me-2" width="16" height="16">
-                            <use xlink:href="#speedometer2"></use>
-                        </svg>
-                        International
+                        <a href="/admin_international" class="nav-link active" aria-current="page"
+                            style="font-size: 18px;">
+                            <i style="font-size: 28px;" class="fa fa-home"></i>
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="#speedometer2"></use>
+                            </svg>
+                            International
+                        </a>
+                    </li>
+                    <li id="review-btn">
+                        <a href="/daftar_review" class="nav-link link-body-emphasis" style="font-size: 18px;"><i
+                                style='font-size:28px' class='fas'>&#xf682;</i>
+                            <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="#table"></use>
+                            </svg>
+                            Pesanan
+                        </a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="dropdown">
+                    <a href="#"
+                        class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false" style="padding: 5px; color: #4870f9">
+                        <img src="{{url_for('static', filename='/profil_admin/admin.png')}}" alt="" width="32"
+                            height="32" class="rounded-circle me-2">
+                        <strong>PesonaWisata | Admin</strong>
                     </a>
-                </li>
-                  <li id="user-btn">
-                      <a href="/daftar_user" class="nav-link link-body-emphasis" style="font-size: 18px;">
-                          <i style='font-size:21px' class='fas'>&#xf0c0;</i>
-                          <svg class="bi pe-none me-2" width="16" height="16">
-                              <use xlink:href="#speedometer2"></use>
-                          </svg>
-                          User
-                      </a>
-                  </li>
-                  <li id="review-btn">
-                      <a href="/daftar_review" class="nav-link link-body-emphasis" style="font-size: 18px;"><i
-                              style='font-size:28px' class='fas'>&#xf682;</i>
-                          <svg class="bi pe-none me-2" width="16" height="16">
-                              <use xlink:href="#table"></use>
-                          </svg>
-                          Review
-                      </a>
-                  </li>
-              </ul>
-              <hr>
-              <div class="dropdown">
-                  <a href="#"
-                      class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
-                      data-bs-toggle="dropdown" aria-expanded="false" style="padding: 5px; color: #4870f9">
-                      <img src="{{url_for('static', filename='/profil_admin/admin.png')}}" alt="" width="32"
-                          height="32" class="rounded-circle me-2">
-                      <strong>PesonaWisata | Admin</strong>
-                  </a>
-                  <ul class="dropdown-menu text-small shadow">
-                      <li><a class="dropdown-item signout" href="/admin/logout" style="justify-content: center; text-align: center; color: #4870f9; font-weight: 700;">Sign out</a></li>
-                  </ul>
-                  <footer>
-                      <p class="text-center text-body-secondary"
-                          style="font-family: 'Bitter', serif; font-family: 'Shantell Sans', cursive; font-family: 'Tilt Neon', cursive; padding-top: 25px;">
-                          © 2023 PesonaWisata</p>
-                  </footer>
-              </div>
-          </div>
-      </div>
-      <!-- End Sidebar -->
+                    <ul class="dropdown-menu text-small shadow">
+                        <li><a class="dropdown-item signout" href="/admin/logout"
+                                style="justify-content: center; text-align: center; color: #4870f9; font-weight: 700;">Sign
+                                out</a></li>
+                    </ul>
+                    <footer>
+                        <p class="text-center text-body-secondary"
+                            style="font-family: 'Bitter', serif; font-family: 'Shantell Sans', cursive; font-family: 'Tilt Neon', cursive; padding-top: 25px;">
+                            © 2023 PesonaWisata</p>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar -->
 
-      <div class="main">
-          <div class="title" style="text-align: center; color: #91b637;">
-              <p>ADMINISTRATOR PANEL</p>
-          </div>
+        <div class="main">
+            <div class="title" style="text-align: center; color: #91b637;">
+                <p>ADMINISTRATOR PANEL</p>
+            </div>
 
-          <a href="{{ url_for('add_card') }}" class="btnadd">
-              <span>
-                  <i style='font-size:15px; justify-content: center;' class='fas'>&#xf067;</i><b>ADD NEW</b>
-              </span>
-          </a>
+            <a href="{{ url_for('add_card') }}" class="btnadd">
+                <span>
+                    <i style='font-size:15px; justify-content: center;' class='fas'>&#xf067;</i><b>ADD NEW</b>
+                </span>
+            </a>
 
-          <!-- TABLE UPDATE -->
+            <!-- TABLE UPDATE -->
 
-          <div class="container">
-              <p style="font-size: 25px; text-align: center; color: #91b637;"><b>TABLE UPDATE DATA INTERNATIONAL</b></p>
+            <div class="container">
+                <p style="font-size: 25px; text-align: center; color: #91b637;"><b>TABLE UPDATE DATA INTERNATIONAL</b>
+                </p>
 
-              <table class="table">
-                  <thead class="thead-light" style="color: #91b637">
-                      <tr>
-                          <th scope="col">File</th>
-                          <th scope="col">Judul</th>
-                          <th scope="col">Deskripsi</th>
-                          <th scope="col">Time</th>
-                          <th scope="col">Actions</th>
-                      </tr>
-                  </thead>
-                  <tbody id="tbody-box" style="color: #91b637">
-                      {% for data in balidest %}
-                      <tr>
-                          <td>{{ data.file }}</td>
-                          <td>{{ data.judul }}</td>
-                          <td>{{ data.desc }}</td>
-                          <td>{{ data.time }}</td>
-                          <td>
-                              <!-- <a href="/updates?id={{ data._id }}" class="upbtn">Update</a> -->
-                              <div style="margin-left: 5px; margin-bottom: 6px; margin-top: 5px;">
-                                  <a href="admin-up-international.html" style="margin-bottom: 5px;">
-                                      <button class="upbtn" style="justify-content: center;"><i
-                                              style='font-size:22px; color: white;' class='fas'>&#xf044;</i>
-                                      </button>
-                                  </a>
-                                  <br>
+                <table class="table">
+                    <thead class="thead-light" style="color: #91b637">
+                        <tr>
+                            <th scope="col">File</th>
+                            <th scope="col">Judul</th>
+                            <th scope="col">Deskripsi</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-box" style="color: #91b637">
+                        {% for data in balidest %}
+                        <tr>
+                            <td>{{ data.file }}</td>
+                            <td>{{ data.judul }}</td>
+                            <td>{{ data.desc }}</td>
+                            <td>{{ data.time }}</td>
+                            <td>
+                                <!-- <a href="/updates?id={{ data._id }}" class="upbtn">Update</a> -->
+                                <div style="margin-left: 5px; margin-bottom: 6px; margin-top: 5px;">
+                                    <a href="admin-up-international.html" style="margin-bottom: 5px;">
+                                        <button class="upbtn" style="justify-content: center;"><i
+                                                style='font-size:22px; color: white;' class='fas'>&#xf044;</i>
+                                        </button>
+                                    </a>
+                                    <br>
 
-                              </div>
-                              <div style="margin-left: 5px;">
-                                  <form action="/hapus" method="post" style="display: inline; ">
-                                      <input type="hidden" name="id" value="{{ data._id }}">
-                                      <button class="delbtn" onclick="contoh()"><i
-                                              style='font-size:21px; color: white;' class='fas'>&#xf1f8;</i></button>
-                                  </form>
-                              </div>
-                          </td>
-                      </tr>
-                      {% endfor %}
-                  </tbody>
-              </table>
-          </div>
+                                </div>
+                                <div style="margin-left: 5px;">
+                                    <form action="/hapus" method="post" style="display: inline; ">
+                                        <input type="hidden" name="id" value="{{ data._id }}">
+                                        <button class="delbtn" onclick="contoh()"><i
+                                                style='font-size:21px; color: white;' class='fas'>&#xf1f8;</i></button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-          <!-- TABLE UPDATE END -->
+            <!-- TABLE UPDATE END -->
 
-          </div>
-      </div>
-  </div>
+        </div>
+    </div>
+    </div>
 </body>
+
 </html>

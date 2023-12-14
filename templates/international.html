@@ -32,6 +32,37 @@
 
     <!-- Template Stylesheet -->
     <link href="./static/css/style.css" rel="stylesheet" />
+
+    <script>
+
+        $(document).ready(function () {
+            get_international();
+            bsCustomFileInput.init();
+        });
+        function get_international() {
+            $.ajax({
+                url: "/international",
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    let internationalList = response;
+                    // Clear the existing content
+                    $('#international-list').empty();
+
+                    // Iterate over the wisataList and append the data to the div
+                    for (let i = 0; i < internationalList.length; i++) {
+                        let attraction = internationalList[i];
+                        let html = '<div class="column is-3"><div class="card is-shady" style="height: 400px; border-radius: 20px;"><div class="card-image has-text-centered"><img src="/' + attraction.image_international + '" alt="Image 3" class="is-3by2" style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px 20px 0 0;"></div><div class="card-content"><div class="content"> <h4>' + attraction.name + '</h4><p>' + attraction.description + '</p><p><a href="/wisata/' + attraction.id + '">Cek Selengkapnya</a></p></div></div></div></div>'
+                        $('#international-list').append(html);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        }
+
+    </script>
 </head>
 
 <body>
@@ -47,7 +78,7 @@
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
         <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
-            <a href="/index" class="navbar-brand p-0">
+            <a href="/" class="navbar-brand p-0">
                 <h1 class="text-primary m-0">
                     <i class="fa fa-map-marker-alt me-3"></i>PesonaWisata
                 </h1>
