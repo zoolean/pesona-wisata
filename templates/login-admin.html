@@ -34,6 +34,7 @@
     <link
       href="./static/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css"
       rel="stylesheet"
+
     />
 
     <!-- Customized Bootstrap Stylesheet -->
@@ -41,24 +42,55 @@
 
     <!-- Template Stylesheet -->
     <link href="./static/css/style.css" rel="stylesheet" />
+
+    <script>
+      const SECRET_KEY=PESONAWISATA
+      function adm_sign_in() {
+        let email = $("#email").val();
+        let password = $("#password").val();
+  
+        $.ajax({
+          type: "POST",
+          url: "/admin/sign_in",
+          data: {
+            email: email,
+            password: password,
+            category : admin
+          },
+          success: function (response) {
+            if (response["result"] === "success") {
+              $.cookie("mytoken", response["token"], { path: "/" });
+              window.location.replace("/");
+            } else {
+              // alert(response["msg"]);
+              Swal.fire(
+                'Oops',
+                response["msg"],
+                'error'
+              )
+            }
+          },
+        });
+      }
+    </script>
   </head>
   </head>
   <body>
       
     <div class="wrapper wow fadeIn">
       <div class="title">Admin</div>
-      <form action="adminhome.html">
+      <form action="/admin_domestic">
         <div class="field">
-          <input type="text" required />
+          <input id="email" type="text" required />
           <label>Username</label>
         </div>
         <div class="field">
-          <input type="password" required />
+          <input id="password" type="password" required />
           <label>Password</label>
         </div>
         <div class="content"></div>
         <div class="field">
-          <input type="submit" value="Login" />
+          <input type="submit" value="Login" onclick="adm_sign_in()" />
         </div>
       </form>
     </div>
