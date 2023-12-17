@@ -12,6 +12,7 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 from babel.numbers import format_currency
 import os
+from services.usersignin import *
 
 app = Flask(__name__)
 
@@ -35,12 +36,12 @@ def main():
         is_admin = user_info.get("category") == "admin"
         logged_in = True
         print(user_info)
-        return render_template('homepage.html', user_info=user_info, logged_in = logged_in, is_admin = is_admin)
+        return render_template('index.html', user_info=user_info, logged_in = logged_in, is_admin = is_admin)
     except jwt.ExpiredSignatureError:
         msg = 'Your token has expired'
     except jwt.exceptions.DecodeError:
         msg = 'There was a problem logging you in'
-    return render_template('homepage.html', msg=msg)
+    return render_template('index.html', msg=msg)
 
 
 # routing ke halaman login
@@ -51,37 +52,38 @@ def signin():
 #log in user
 @app.route('/sign_in', methods=['POST'])
 def sign_in():
-    email = request.form["email"]
-    password = request.form["password"]
-    print(email)
-    pw_hash = hashlib.sha256(password.encode("utf-8")).hexdigest()
-    print(pw_hash)
-    result = db.users.find_one(
-        {
-            "email": email,
-            "password": pw_hash,
-        }
-    )
-    if result:
-        payload = {
-            "id": email,
-            "exp": datetime.utcnow() + timedelta(seconds=60 * 60 * 24),
-        }
-        token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+    signin
+    # email = request.form["email"]
+    # password = request.form["password"]
+    # print(email)
+    # pw_hash = hashlib.sha256(password.encode("utf-8")).hexdigest()
+    # print(pw_hash)
+    # result = db.users.find_one(
+    #     {
+    #         "email": email,
+    #         "password": pw_hash,
+    #     }
+    # )
+    # if result:
+    #     payload = {
+    #         "id": email,
+    #         "exp": datetime.utcnow() + timedelta(seconds=60 * 60 * 24),
+    #     }
+    #     token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
 
-        return jsonify(
-            {
-                "result": "success",
-                "token": token,
-            }
-        )
-    else:
-        return jsonify(
-            {
-                "result": "fail",
-                "msg": "We could not find a user with that id/password combination",
-            }
-        )
+    #     return jsonify(
+    #         {
+    #             "result": "success",
+    #             "token": token,
+    #         }
+    #     )
+    # else:
+    #     return jsonify(   
+    #         {
+    #             "result": "fail",
+    #             "msg": "We could not find a user with that id/password combination",
+    #         }
+    #     )
 
 # routing ke halaman register
 @app.route('/signup')
@@ -235,50 +237,7 @@ def get_international_detail(international_id):
     return render_template('detail-international.html', attraction = attraction, msg=msg)
 
 #book ticket international
-@app.route('/international/book', methods=['POST'])
-def book_ticket():
-    attraction_id = request.form.get('attraction_id')
-    num_tickets = int(request.form.get('num_tickets'))
-    name = request.form.get('name')
-    email = request.form.get('email')
 
-    if not attraction_id or not num_tickets or not name or not email:
-        return jsonify({'message': 'Attraction ID, number of tickets, visitor name, and visitor email are required'}), 400
-
-    # Check ketersediaan domestic
-    attraction = db.international.find_one({'_id': ObjectId(attraction_id)})
-    international = attraction['name']
-    location = attraction['location']
-    if not attraction:
-        return jsonify({'message': 'Attraction not found'}), 404
-
-    # Check ketersediaan tiket
-    total_tickets = attraction.get('total_tickets', 0)
-    if num_tickets > total_tickets:
-        return jsonify({'message': 'Not enough available tickets'}), 400
-
-    # Update sisa tiket setelah di booking
-    updated_tickets = total_tickets - num_tickets
-    db.international.update_one({'_id': ObjectId(attraction_id)}, {'$set': {'total_tickets': updated_tickets}})
-
-    price = attraction.get('price', 0)
-    total_price = price * num_tickets
-    formatted_price = format_currency(total_price, 'IDR', locale='id_ID')
-
-    # Record data booking tiket pengunjung
-    db.bookings.insert_one({
-        'attraction_id': attraction_id,
-        'location': location,
-        'international' : international,
-        'num_tickets': num_tickets,
-        'name': name,
-        'email': email,
-        'total_price' : formatted_price,
-        'proof': '',
-        'status' : 'Pending'
-    })
-
-    return jsonify({'message': 'Ticket booked successfully'}), 200
 
 
   
