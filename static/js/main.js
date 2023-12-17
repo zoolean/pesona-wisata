@@ -92,3 +92,73 @@
     
 })(jQuery);
 
+function sign_out() {
+    $.removeCookie("mytoken", { path: "/" });
+    alert("Logged out!");
+    window.location.href = "/";
+    // Swal.fire({
+    //     icon: 'success',
+    //     title: 'Logged Out!',
+    //     text: 'You have been successfully logged out.',
+    //     showConfirmButton: false,
+    //     timer: 2000, // Adjust the timer value (in milliseconds) as needed
+    //     onClose: function() {
+    //         window.location.reload();
+    //     }
+    // });
+}
+
+function searc1(event) {
+    if (event.keyCode === 13) {
+        let searchQuery = $('#searchInput').val();
+        let url = '/search?q=' + encodeURIComponent(searchQuery);
+
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function (response) {
+                let wisataList = response;
+                // Clear the existing content
+                $('#wisata-list').empty();
+                if (wisataList.length === 0) {
+                    $('#wisata-list').append('<div class="container"><section class="hero is-fullwidth is-bold"><div class="hero-body"><div class="container has-text-centered"><h1 class="title">Oops!!</h1><h2 class="subtitle">Pencarian tidak ditemukan</h2></div></div></section></div>');
+                } else {
+                    for (let i = 0; i < wisataList.length; i++) {
+                        let attraction = wisataList[i];
+                        let html = '<div class="column is-3"><div class="card is-shady" style="height: 400px; border-radius: 20px;"><div class="card-image has-text-centered"><img src="/'+ attraction.image_wisata +'" alt="Image 3" class="is-3by2" style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px 20px 0 0;"></div><div class="card-content"><div class="content"><h4>' + attraction.name + '</h4><p>' + attraction.description + '</p><p><a href="/wisata/' + attraction.id + '">Cek Selengkapnya</a></p></div></div></div></div>';
+                        $('#wisata-list').append(html);
+                    }
+                }
+            }
+        });
+    }
+
+}
+
+function search2(event) {
+    if (event.keyCode === 13) {
+        let searchQuery = $('#searchInput').val();
+        let url = '/search?q=' + encodeURIComponent(searchQuery);
+
+        $.ajax({
+            url: url,
+            method: 'GET',
+            success: function (response) {
+                let wisataList = response;
+                // Clear the existing content
+                $('#wisata-list').empty();
+                if (wisataList.length === 0) {
+                    $('#wisata-list').append('<div class="container"><section class="hero is-fullwidth is-bold"><div class="hero-body"><div class="container has-text-centered"><h1 class="title">Oops!!</h1><h2 class="subtitle">Pencarian tidak ditemukan</h2></div></div></section></div>');
+                } else {
+                    for (let i = 0; i < wisataList.length; i++) {
+                        let attraction = wisataList[i];
+                        let html = '<div class="column is-3"><div class="card is-shady" style="height: 400px; border-radius: 20px;"><div class="card-image has-text-centered"><img src="/'+ attraction.image_wisata +'" alt="Image 3" class="is-3by2" style="width: 100%; height: 200px; object-fit: cover; border-radius: 20px 20px 0 0;"></div><div class="card-content"><div class="content"><h4>' + attraction.name + '</h4><p>' + attraction.description + '</p><p><a href="/wisata/' + attraction.id + '">Cek Selengkapnya</a></p></div></div></div></div>';
+                        $('#wisata-list').append(html);
+                    }
+                }
+            }
+        });
+    }
+
+}
+
